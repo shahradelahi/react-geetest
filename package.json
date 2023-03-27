@@ -1,0 +1,38 @@
+{
+  "name": "react-geetest",
+  "version": "dev",
+  "description": "React library for GeeTest captcha integration",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "tsc",
+    "style-fix": "npx prettier -w ."
+  },
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.js",
+    "types": "./dist/index.d.ts"
+  },
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shahradelahi/react-geetest"
+  },
+  "keywords": [
+    "react",
+    "geetest",
+    "captcha"
+  ],
+  "peerDependencies": {
+    "react": ">= 17.0.0",
+    "react-dom": ">= 17.0.0"
+  },
+  "author": "Shahrad Elahi <shahrad@litehex.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.0.21",
+    "prettier": "^2.7.1",
+    "turnstile-types": "^1.1.2",
+    "typescript": "^4.8.4"
+  }
+}
