@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: CI Stuff
+      - name: Installing dependencies and build
         uses: actions/setup-node@v3
         with:
           node-version: 18
