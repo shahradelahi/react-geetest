@@ -6,7 +6,7 @@ integrate [GeeTest captcha](https://docs.geetest.com/BehaviorVerification/overvi
 ## Installation
 
 ```bash
-npm install react-geetest
+npm install react-geetest-v4
 ```
 
 ## Usage
