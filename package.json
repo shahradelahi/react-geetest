@@ -1,22 +1,20 @@
 {
   "name": "react-geetest-v4",
-  "version": "dev",
+  "version": "v1.0.1",
   "description": "React library for GeeTest captcha v4 integration",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "tsc",
     "style-fix": "npx prettier -w ."
   },
-  "exports": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.js",
-    "types": "./dist/index.d.ts"
-  },
-  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/shahradelahi/react-geetest"
+  },
+  "bugs": {
+    "url": "https://github.com/shahradelahi/react-geetest/issues"
   },
   "keywords": [
     "react",
@@ -29,10 +27,21 @@
   },
   "author": "Shahrad Elahi <shahrad@litehex.com>",
   "license": "MIT",
+  "files": [
+    "dist",
+    "package.json",
+    "package-lock.json",
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
     "@types/react": "^18.0.21",
     "prettier": "^2.7.1",
     "turnstile-types": "^1.1.2",
     "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1"
   }
 }
