@@ -15,9 +15,10 @@ npm install react-geetest-v4
 
 ```tsx
 import React from "react";
-import GeeTest from "react-geetest-v4";
+import GeeTest, { GeeTestRef } from "react-geetest-v4";
 
 export default function Home(): JSX.Element {
+  const captchaRef = React.useRef<GeeTestRef | null>(null); // Access: showCaptcha, reset, destroy
   return (
     <div>
       <GeeTest
@@ -28,6 +29,7 @@ export default function Home(): JSX.Element {
       />
       <br />
       <GeeTest
+        ref={captchaRef}
         captchaId={"your captcha id"}
         product={"bind"}
         onSuccess={() => console.log("success")}

@@ -1,12 +1,13 @@
 export type InitConfig = {
   captchaId: string;
-  product?: "float" | "popup" | "bind";
+  product: "float" | "popup" | "bind";
   nativeButton?: {
     width?: string;
     height?: string;
   };
   rem?: number;
   language?:
+    | string
     | "zho"
     | "eng"
     | "zho-tw"

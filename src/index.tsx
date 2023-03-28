@@ -17,6 +17,7 @@ export type GeeTestProps = GeeTestProduct &
       width?: string;
       height?: string;
     };
+    rootClassName?: string;
   };
 
 export type GeeTestBind = {
@@ -37,6 +38,7 @@ export type GeeTestProduct = GeeTestBind | GeeTestPopup | GeeTestFlat;
 export type GeeTestRef = {
   reset: () => void;
   destroy: () => void;
+  showCaptcha: () => void;
 };
 
 const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (
@@ -44,7 +46,7 @@ const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (
   ref
 ): JSX.Element {
   const uniqueId = React.useId();
-  const { container, containerId, product, ...rest } = props;
+  const { container, containerId, rootClassName, product, ...rest } = props;
   const {
     onError,
     onReady,
@@ -63,6 +65,7 @@ const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (
   React.useImperativeHandle(ref, () => ({
     reset: () => captcha?.reset(),
     destroy: () => captcha?.destroy(),
+    showCaptcha: () => captcha?.showCaptcha(),
   }));
 
   React.useEffect(() => {
@@ -89,6 +92,7 @@ const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (
         width: container?.width || "100%",
         height: container?.height || "auto",
       }}
+      {...(rootClassName && { rootClassName })}
       {...(product === "bind" && {
         onClick: () => captcha?.showCaptcha(),
         children: props.children,

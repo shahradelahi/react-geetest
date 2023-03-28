@@ -1,4 +1,4 @@
-import { GeeTestValidateResult } from "types";
+import { GeeTestValidateResult } from "./types";
 import crypto from "crypto-js";
 
 const VALIDATE_URL = "https://gcaptcha4.geetest.com/validate";

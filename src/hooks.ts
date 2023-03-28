@@ -1,6 +1,6 @@
 import React from "react";
-import { GeeTest, InitConfig } from "types";
-import { GeeTestState } from "index";
+import { GeeTest, InitConfig } from "./types";
+import { GeeTestState } from "./index";
 
 export function useGeeTest(
   captchaId: string,
@@ -31,9 +31,16 @@ export function useGeeTest(
       return;
     }
 
-    window.initGeetest4({ captchaId: captchaId, ...options }, (captchaObj) => {
-      setCaptchaObj(captchaObj);
-    });
+    const defaultOptions: Partial<InitConfig> = {
+      protocol: "https://",
+    };
+
+    window.initGeetest4(
+      { captchaId: captchaId, ...defaultOptions, ...options },
+      (captchaObj) => {
+        setCaptchaObj(captchaObj);
+      }
+    );
 
     return () => {
       if (captchaObj) {
