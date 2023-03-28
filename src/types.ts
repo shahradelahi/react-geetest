@@ -38,10 +38,15 @@ export type InitConfig = {
   userInfo?: string;
 };
 
-export declare function initGeetest4(
+export function initGeetest4(
   config: InitConfig,
   callback: (captchaObj: GeeTest) => void
-): void;
+): void {
+  if (typeof window === "undefined") {
+    throw new Error("initGeetest4 can only be called in browser");
+  }
+  return window.initGeetest4(config, callback);
+}
 
 export type GeeTest = GeeTestEvents & {
   appendTo: (element: HTMLElement | string) => void;

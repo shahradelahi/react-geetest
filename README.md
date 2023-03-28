@@ -13,7 +13,7 @@ npm install react-geetest-v4
 
 ```tsx
 import React from "react";
-import GeeTest from "react-geetest";
+import GeeTest from "react-geetest-v4";
 
 export default function Home(): JSX.Element {
   return (

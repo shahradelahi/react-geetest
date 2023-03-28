@@ -4,6 +4,7 @@ import { useGeeTest } from "./hooks";
 
 export * from "./hooks";
 export * from "./types";
+export * from "./utils";
 
 export type GeeTestState = "loading" | "ready" | "success" | "closed" | "error";
 

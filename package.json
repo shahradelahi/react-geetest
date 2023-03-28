@@ -1,6 +1,6 @@
 {
   "name": "react-geetest-v4",
-  "version": "v1.0.1",
+  "version": "v1.0.3",
   "description": "React library for GeeTest captcha v4 integration",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,6 +8,11 @@
     "prepublishOnly": "npm run build",
     "build": "tsc",
     "style-fix": "npx prettier -w ."
+  },
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.js",
+    "types": "./dist/index.d.ts"
   },
   "repository": {
     "type": "git",
