@@ -1,5 +1,9 @@
 import React from "react";
-import { GeeTestEventCallbacks, InitConfig } from "./types";
+import {
+  GeeTestEventCallbacks,
+  GeeTestValidateResult,
+  InitConfig,
+} from "./types";
 import { useGeeTest } from "./hooks";
 
 export * from "./hooks";
@@ -39,6 +43,7 @@ export type GeeTestRef = {
   reset: () => void;
   destroy: () => void;
   showCaptcha: () => void;
+  getValidate: () => GeeTestValidateResult | undefined;
 };
 
 const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (
@@ -66,6 +71,7 @@ const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (
     reset: () => captcha?.reset(),
     destroy: () => captcha?.destroy(),
     showCaptcha: () => captcha?.showCaptcha(),
+    getValidate: () => captcha?.getValidate(),
   }));
 
   React.useEffect(() => {

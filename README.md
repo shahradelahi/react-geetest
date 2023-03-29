@@ -18,7 +18,7 @@ import React from "react";
 import GeeTest, { GeeTestRef } from "react-geetest-v4";
 
 export default function Home(): JSX.Element {
-  const captchaRef = React.useRef<GeeTestRef | null>(null); // Access: showCaptcha, reset, destroy
+  const captchaRef = React.useRef<GeeTestRef | null>(null); // Access: showCaptcha, reset, ...
   return (
     <div>
       <GeeTest
