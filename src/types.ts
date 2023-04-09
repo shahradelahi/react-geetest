@@ -24,6 +24,7 @@ export type InitConfig = {
     | "fra"
     | "deu";
   protocol?: "http://" | "https://" | "file://";
+  script?: string;
   timeout?: number;
   hideBar?: string[];
   mask?: {

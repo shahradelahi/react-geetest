@@ -13,13 +13,14 @@ export function useGeeTest(
   const [currentState, setCurrentSate] =
     React.useState<GeeTestState>("loading");
   const [scriptLoaded, setScriptLoaded] = React.useState<boolean>(false);
+  const { script: staticScript, ...opts } = options;
 
   React.useEffect(() => {
     if (typeof window === "undefined" || scriptLoaded) {
       return;
     }
     const script = document.createElement("script");
-    script.src = "https://static.geetest.com/v4/gt4.js";
+    script.src = staticScript || "https://static.geetest.com/v4/gt4.js";
     script.onload = () => {
       setScriptLoaded(true);
     };
@@ -36,7 +37,7 @@ export function useGeeTest(
     };
 
     window.initGeetest4(
-      { captchaId: captchaId, ...defaultOptions, ...options },
+      { captchaId: captchaId, ...defaultOptions, ...opts },
       (captchaObj) => {
         setCaptchaObj(captchaObj);
       }
