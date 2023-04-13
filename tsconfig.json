@@ -1,15 +1,9 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "commonjs",
     "declaration": true,
     "rootDir": "./src",
-    "strict": true,
     "outDir": "./dist",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "downlevelIteration": true,
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
@@ -18,12 +12,19 @@
     },
     "jsx": "react",
     "esModuleInterop": true,
-    "target": "ES2022",
+    "target": "es2022",
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "incremental": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   },
   "include": [ "src/**/*" ],
   "exclude": [ "node_modules", "dist", "examples" ]

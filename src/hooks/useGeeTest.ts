@@ -48,17 +48,15 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
   }, []);
 
   React.useEffect(() => {
-    if (typeof window === 'undefined' || !scriptLoaded) {
-      return;
+    if (typeof window !== 'undefined' && !scriptLoaded) {
+      const defaultOptions: Partial<InitConfig> = {
+        protocol: 'https://',
+      };
+
+      window.initGeetest4({ captchaId: captchaId, ...defaultOptions, ...opts }, (captchaObj) => {
+        setCaptchaObj(captchaObj);
+      });
     }
-
-    const defaultOptions: Partial<InitConfig> = {
-      protocol: 'https://',
-    };
-
-    window.initGeetest4({ captchaId: captchaId, ...defaultOptions, ...opts }, (captchaObj) => {
-      setCaptchaObj(captchaObj);
-    });
 
     return () => {
       if (captchaObj) {
