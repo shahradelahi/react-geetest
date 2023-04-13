@@ -1,7 +1,6 @@
 # GeeTest integration for React
 
-A very simple React component to
-integrate [GeeTest captcha](https://docs.geetest.com/BehaviorVerification/overview/start/).
+A very simple React component to integrate [GeeTest captcha](https://docs.geetest.com/BehaviorVerification/overview/start/).
 
 ## Installation
 
@@ -14,25 +13,25 @@ npm install react-geetest-v4
 #### Normal practice
 
 ```tsx
-import React from "react";
-import GeeTest, { GeeTestRef } from "react-geetest-v4";
+import React from 'react';
+import GeeTest, { GeeTestRef } from 'react-geetest-v4';
 
 export default function Home(): JSX.Element {
   const captchaRef = React.useRef<GeeTestRef | null>(null); // Access: showCaptcha, reset, ...
   return (
     <div>
       <GeeTest
-        captchaId={"your captcha id"}
-        containerId={"geetest-captcha"} // Optional
-        onSuccess={() => console.log("success")}
-        onReady={() => console.log("ready")}
+        captchaId={'your captcha id'}
+        containerId={'geetest-captcha'} // Optional
+        onSuccess={() => console.log('success')}
+        onReady={() => console.log('ready')}
       />
       <br />
       <GeeTest
         ref={captchaRef}
-        captchaId={"your captcha id"}
-        product={"bind"}
-        onSuccess={() => console.log("success")}
+        captchaId={'your captcha id'}
+        product={'bind'}
+        onSuccess={() => console.log('success')}
       >
         <button>Submit</button>
       </GeeTest>
@@ -44,14 +43,14 @@ export default function Home(): JSX.Element {
 #### Using hooks
 
 ```tsx
-import React from "react";
-import { useGeeTest } from "react-geetest-v4";
+import React from 'react';
+import { useGeeTest } from 'react-geetest-v4';
 
 export default function Home(): JSX.Element {
-  const { captcha, state } = useGeeTest("your captcha id", {
-    product: "bind",
-    protocol: "https://",
-    containerId: "geetest-captcha",
+  const { captcha, state } = useGeeTest('your captcha id', {
+    product: 'bind',
+    protocol: 'https://',
+    containerId: 'geetest-captcha',
   });
 
   const onClick = () => {
@@ -71,19 +70,16 @@ export default function Home(): JSX.Element {
 On this example we're using Next.JS handlers, but you can use any other framework.
 
 ```typescript
-import type { NextApiRequest, NextApiResponse } from "next";
-import { validateCaptcha, generateSignToken } from "react-geetest-v4";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { validateCaptcha, generateSignToken } from 'react-geetest-v4';
 
-const CAPTCHA_ID = "647f5ed2ed8acb4be36784e01556bb71";
-const CAPTCHA_KEY = "b09a7aafbfd83f73b35a9b530d0337bf";
+const CAPTCHA_ID = '647f5ed2ed8acb4be36784e01556bb71';
+const CAPTCHA_KEY = 'b09a7aafbfd83f73b35a9b530d0337bf';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { captcha_output, gen_time, lot_number, pass_token } = req.body;
   if (!captcha_output || !gen_time || !lot_number || !pass_token) {
-    return res.status(400).json({ error: "Missing required parameters" });
+    return res.status(400).json({ error: 'Missing required parameters' });
   }
 
   const validate = await validateCaptcha({

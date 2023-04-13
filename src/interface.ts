@@ -1,6 +1,32 @@
+import React from 'react';
+
+export type GeeTestState = 'loading' | 'ready' | 'success' | 'closed' | 'error';
+
+export type GeeTestBind = {
+  product: 'bind';
+  children: React.ReactNode;
+};
+
+export type GeeTestPopup = {
+  product: 'popup';
+};
+
+export type GeeTestFlat = {
+  product: 'flat';
+};
+
+export type GeeTestProduct = GeeTestBind | GeeTestPopup | GeeTestFlat;
+
+export type GeeTestRef = {
+  reset: () => void;
+  destroy: () => void;
+  showCaptcha: () => void;
+  getValidate: () => GeeTestValidateResult | undefined;
+};
+
 export type InitConfig = {
   captchaId: string;
-  product: "float" | "popup" | "bind";
+  product: 'float' | 'popup' | 'bind';
   nativeButton?: {
     width?: string;
     height?: string;
@@ -8,22 +34,22 @@ export type InitConfig = {
   rem?: number;
   language?:
     | string
-    | "zho"
-    | "eng"
-    | "zho-tw"
-    | "zho-hk"
-    | "udm"
-    | "jpn"
-    | "ind"
-    | "kor"
-    | "rus"
-    | "ara"
-    | "spa"
-    | "pon"
-    | "por"
-    | "fra"
-    | "deu";
-  protocol?: "http://" | "https://" | "file://";
+    | 'zho'
+    | 'eng'
+    | 'zho-tw'
+    | 'zho-hk'
+    | 'udm'
+    | 'jpn'
+    | 'ind'
+    | 'kor'
+    | 'rus'
+    | 'ara'
+    | 'spa'
+    | 'pon'
+    | 'por'
+    | 'fra'
+    | 'deu';
+  protocol?: 'http://' | 'https://' | 'file://';
   script?: string;
   timeout?: number;
   hideBar?: string[];
@@ -31,6 +57,7 @@ export type InitConfig = {
     outside?: boolean;
     bgColor?: string;
   };
+  force?: boolean;
   apiServers?: string[];
   nextWidth?: string;
   riskType?: string;
@@ -40,12 +67,9 @@ export type InitConfig = {
   userInfo?: string;
 };
 
-export function initGeetest4(
-  config: InitConfig,
-  callback: (captchaObj: GeeTest) => void
-): void {
-  if (typeof window === "undefined") {
-    throw new Error("initGeetest4 can only be called in browser");
+export function initGeetest4(config: InitConfig, callback: (captchaObj: GeeTest) => void): void {
+  if (typeof window === 'undefined') {
+    throw new Error('initGeetest4 can only be called in browser');
   }
   return window.initGeetest4(config, callback);
 }
@@ -93,7 +117,7 @@ export type GeeTestEventCallbacks = {
 
 export type GeeTestEvent = keyof GeeTestEvents;
 
-type GeeTestError = {
+export type GeeTestError = {
   code: string;
   msg: string;
   desc: {

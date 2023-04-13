@@ -2,7 +2,6 @@
   "compilerOptions": {
     "module": "CommonJS",
     "declaration": true,
-    "sourceMap": true,
     "rootDir": "./src",
     "strict": true,
     "outDir": "./dist",
@@ -14,18 +13,18 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "*": ["src/*", "node_modules/*"]
+      "*": [ "src/*", "node_modules/*" ],
+      "react-geetest-v4": [ "src/index.tsx" ],
     },
     "jsx": "react",
     "esModuleInterop": true,
-    "target": "ES2019",
+    "target": "ES2022",
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "types": ["turnstile-types"]
+    "isolatedModules": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "examples"]
+  "include": [ "src/**/*" ],
+  "exclude": [ "node_modules", "dist", "examples" ]
 }

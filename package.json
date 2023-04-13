@@ -1,6 +1,6 @@
 {
   "name": "react-geetest-v4",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "React library for GeeTest captcha v4 integration",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -41,9 +41,8 @@
   ],
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
-    "@types/react": "^18.0.21",
-    "prettier": "^2.7.1",
-    "turnstile-types": "^1.1.2",
+    "@types/react": "^18.0.35",
+    "prettier": "^2.8.7",
     "typescript": "^4.8.4"
   },
   "dependencies": {
