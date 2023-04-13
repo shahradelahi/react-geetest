@@ -48,7 +48,7 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
   }, []);
 
   React.useEffect(() => {
-    if (typeof window !== 'undefined' && !scriptLoaded) {
+    if (typeof window !== 'undefined' && scriptLoaded) {
       const defaultOptions: Partial<InitConfig> = {
         protocol: 'https://',
       };
