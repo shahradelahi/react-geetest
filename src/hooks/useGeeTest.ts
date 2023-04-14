@@ -13,23 +13,23 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
   const [captchaObj, setCaptchaObj] = React.useState<GeeTest>();
   const [currentState, setCurrentSate] = React.useState<GeeTestState>('loading');
   const [scriptLoaded, setScriptLoaded] = React.useState<boolean>(false);
-  const { script: staticScript, force = false, ...opts } = options;
+  const { script: staticScript, overrideWithForce, ...opts } = options;
 
   React.useEffect(() => {
     if (typeof window === 'undefined' || scriptLoaded) {
       return;
     }
 
-    if (force) {
+    if (overrideWithForce) {
       // downloads gt4 script and modifies the content
       fetch(GT4_JS)
         .then((res) => res.text())
         .then((text) => {
           const script = document.createElement('script');
-          script.innerHTML = forceChange(opts, text);
-          script.onload = () => {
-            setScriptLoaded(true);
-          };
+          script.innerHTML = forceChange({ ...opts, overrideWithForce }, text);
+          script.type = 'text/javascript';
+          document.head.appendChild(script);
+          setScriptLoaded(true);
         })
         .catch((err) => {
           console.error('Error when downloading gt4 script', err);
@@ -40,6 +40,7 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
     else {
       const script = document.createElement('script');
       script.src = staticScript || GT4_JS;
+      script.crossOrigin = 'anonymous';
       script.onload = () => {
         setScriptLoaded(true);
       };
@@ -94,14 +95,17 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
 function forceChange(config: UseGeeTestOptions, scriptTxt: string): string {
   let modifiedScript = scriptTxt;
 
-  const newConfigReg = new RegExp(/var newConfig = camelizeKeys\(newConfig\);/);
   const newConfigStr = 'var newConfig = camelizeKeys(newConfig);';
 
-  if (config.language) {
-    modifiedScript.replace(
-      newConfigReg,
-      newConfigStr + `newConfig.language = '${config.language}';`,
-    );
+  if (config.overrideWithForce) {
+    Object.keys(config.overrideWithForce).forEach((key) => {
+      const rowData = config.overrideWithForce[key];
+      const data = typeof rowData === 'string' ? `'${rowData}'` : rowData;
+      modifiedScript = modifiedScript.replaceAll(
+        newConfigStr,
+        newConfigStr + `newConfig.${key} = ${data};`,
+      );
+    });
   }
 
   return modifiedScript;

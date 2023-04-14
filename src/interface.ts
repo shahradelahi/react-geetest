@@ -57,7 +57,7 @@ export type InitConfig = {
     outside?: boolean;
     bgColor?: string;
   };
-  force?: boolean;
+  overrideWithForce?: GeeTestOverrideParams;
   apiServers?: string[];
   nextWidth?: string;
   riskType?: string;
@@ -123,6 +123,15 @@ export type GeeTestError = {
   desc: {
     detail: string;
   };
+};
+
+export type GeeTestOverrideParams = {
+  arrow?: string;
+  show_voice?: boolean;
+  feedback?: string;
+  logo?: boolean;
+  guard?: boolean;
+  language?: string;
 };
 
 declare global {
