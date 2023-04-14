@@ -125,7 +125,7 @@ export type GeeTestError = {
   };
 };
 
-export type GeeTestOverrideParams = {
+export type GeeTestOverrideParams = Record<string, string | number | boolean> & {
   arrow?: string;
   show_voice?: boolean;
   feedback?: string;

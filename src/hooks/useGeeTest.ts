@@ -1,5 +1,5 @@
 import React from 'react';
-import { GeeTest, GeeTestState, InitConfig } from '../interface';
+import { GeeTest, GeeTestOverrideParams, GeeTestState, InitConfig } from '../interface';
 import { GT4_JS } from '../Constants';
 
 type UseGeeTestOptions = Omit<InitConfig, 'captchaId'>;
@@ -92,14 +92,18 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
   };
 }
 
-function forceChange(config: UseGeeTestOptions, scriptTxt: string): string {
+type ForceChangeConfig = Omit<UseGeeTestOptions, 'overrideWithForce'> & {
+  overrideWithForce: GeeTestOverrideParams;
+};
+
+function forceChange(config: ForceChangeConfig, scriptTxt: string): string {
   let modifiedScript = scriptTxt;
 
   const newConfigStr = 'var newConfig = camelizeKeys(newConfig);';
 
   if (config.overrideWithForce) {
-    Object.keys(config.overrideWithForce).forEach((key) => {
-      const rowData = config.overrideWithForce[key];
+    Object.keys(config.overrideWithForce).forEach((key: any) => {
+      const rowData: string | number | boolean = config.overrideWithForce[key];
       const data = typeof rowData === 'string' ? `'${rowData}'` : rowData;
       modifiedScript = modifiedScript.replaceAll(
         newConfigStr,
