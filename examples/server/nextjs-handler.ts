@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { validateCaptcha, generateSignToken } from 'react-geetest-v4';
+import { generateSignToken, validateCaptcha } from 'react-geetest-v4';
 
 // geetest public key
 const CAPTCHA_ID = '647f5ed2ed8acb4be36784e01556bb71';
@@ -14,15 +14,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'Missing required parameters' });
   }
 
-  const { validate } = await validateCaptcha({
+  const { status, result } = await validateCaptcha({
     captcha_id: CAPTCHA_ID,
     lot_number,
     captcha_output,
     pass_token,
     gen_time,
     sign_token: generateSignToken(lot_number, CAPTCHA_KEY),
-    skip_server_fail: true, // When the request geetest service interface is abnormal, it skips validation to avoid blocking normal business.
   });
 
-  return res.status(200).json({ ok: validate });
+  return res.status(200).json({ ok: result });
 }

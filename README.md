@@ -82,15 +82,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'Missing required parameters' });
   }
 
-  const validate = await validateCaptcha({
+  const { result } = await validateCaptcha({
     captcha_id: CAPTCHA_ID,
-    sign_token: generateSignToken(lot_number, CAPTCHA_KEY),
     lot_number,
     captcha_output,
     pass_token,
     gen_time,
+    sign_token: generateSignToken(lot_number, CAPTCHA_KEY),
   });
 
-  return res.status(200).json({ ok: validate });
+  return res.status(200).json({ ok: result === 'success' });
 }
 ```
