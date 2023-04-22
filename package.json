@@ -1,6 +1,6 @@
 {
   "name": "react-geetest-v4",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "React library for GeeTest captcha v4 integration",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shahradelahi/react-geetest"
+    "url": "git+https://github.com/shahradelahi/react-geetest.git"
   },
   "bugs": {
     "url": "https://github.com/shahradelahi/react-geetest/issues"

@@ -7,7 +7,6 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "*": [ "src/*", "node_modules/*" ],
       "react-geetest-v4": [ "src/index.tsx" ],
     },
     "jsx": "react",

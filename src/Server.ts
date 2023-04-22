@@ -4,10 +4,18 @@ import { GeeTestValidateResult } from './interface';
 
 export type GeeTestValidateParams = GeeTestValidateResult & {
   sign_token: string;
+  skip_server_fail?: boolean;
 };
 
-export async function validateCaptcha(params: GeeTestValidateParams): Promise<boolean> {
-  const { captcha_id, ...postPrams } = params;
+export type GeeTestValidateResponse = {
+  status: 'success' | 'fail';
+  validate: boolean;
+};
+
+export async function validateCaptcha(
+  params: GeeTestValidateParams,
+): Promise<GeeTestValidateResponse> {
+  const { captcha_id, skip_server_fail, ...postPrams } = params;
 
   const url = new URL(VALIDATE_URL);
   url.searchParams.set('captcha_id', captcha_id);
@@ -21,11 +29,19 @@ export async function validateCaptcha(params: GeeTestValidateParams): Promise<bo
   });
 
   // When the request geetest service interface is abnormal, it shall be released to avoid blocking normal business.
-  if (res.status !== 200) {
-    return true;
+  if (!res.status.toString().startsWith('2')) {
+    return {
+      status: 'fail',
+      validate: skip_server_fail || false,
+    };
   }
+
   const response = await res.json();
-  return response.status === 'success';
+
+  return {
+    status: 'success',
+    validate: response.status === 'success',
+  };
 }
 
 export function generateSignToken(lotNumber: string, captchaKey: string): string {
