@@ -1,6 +1,16 @@
 import React from 'react';
 import { useGeeTest } from './hooks/useGeeTest';
-import { GeeTestEventCallbacks, GeeTestProduct, GeeTestRef, InitConfig } from './interface';
+import {
+  GeeTestError,
+  GeeTestEventCallbacks,
+  GeeTestProduct,
+  GeeTestRef,
+  GeeTestValidateResult,
+  InitConfig,
+  OnErrorFn,
+  OnFailFn,
+  OnSuccessFn,
+} from './interface';
 
 export type GeeTestProps = GeeTestProduct &
   Omit<InitConfig, 'product' | 'onError'> &
@@ -39,14 +49,31 @@ const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (props, ref)
 
   React.useEffect(() => {
     if (captcha) {
-      onReady && captcha.onReady(onReady);
-      onNextReady && captcha.onNextReady(onNextReady);
-      onSuccess && captcha.onSuccess(() => onSuccess(captcha.getValidate()));
-      onClose && captcha.onClose(onClose);
-      onFail && captcha.onFail(onFail);
-      onError && captcha.onError(onError);
+      captcha.onReady(() => handleOnEvent('onReady'));
+      captcha.onNextReady(() => handleOnEvent('onNextReady'));
+      captcha.onSuccess(() => handleOnEvent('onSuccess'));
+      captcha.onClose(() => handleOnEvent('onClose'));
+      captcha.onFail((e) => handleOnEvent('onFail', e));
+      captcha.onError((e) => handleOnEvent('onError', e));
     }
   }, [captcha]);
+
+  const handleOnEvent = (event: string, arg?: GeeTestError | GeeTestValidateResult) => {
+    const callback = props[event as keyof GeeTestEventCallbacks];
+    if (!callback) {
+      // callback is not registered
+      return;
+    }
+    if (event === 'onSuccess') {
+      (callback as OnSuccessFn)(captcha?.getValidate());
+      return;
+    }
+    if (event === 'onError' || event === 'onFail') {
+      (callback as OnErrorFn | OnFailFn)(arg as GeeTestError);
+      return;
+    }
+    (callback as () => void)();
+  };
 
   return (
     <div

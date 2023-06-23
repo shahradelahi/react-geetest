@@ -101,7 +101,7 @@ type GeeTestEvents = {
 
 export type OnReadyFn = () => void;
 export type OnNextReadyFn = () => void;
-export type OnSuccessFn = (result: GeeTestValidateResult) => void;
+export type OnSuccessFn = (result: GeeTestValidateResult | undefined) => void;
 export type OnFailFn = (error: GeeTestError) => void;
 export type OnErrorFn = (error: GeeTestError) => void;
 export type OnCloseFn = () => void;

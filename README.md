@@ -23,7 +23,7 @@ export default function Home(): JSX.Element {
       <GeeTest
         captchaId={'your captcha id'}
         containerId={'geetest-captcha'} // Optional
-        onSuccess={() => console.log('success')}
+        onSuccess={(result) => console.log('success. result: ', result)}
         onReady={() => console.log('ready')}
       />
       <br />
