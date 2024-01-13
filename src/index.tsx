@@ -13,4 +13,7 @@ export type {
   GeeTestEventCallbacks,
 };
 
+export { useGeeTest } from './hooks/useGeeTest';
+export type { UseGeeTestOptions } from './hooks/useGeeTest';
+
 export default GeeTest;

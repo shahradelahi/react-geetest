@@ -1,6 +1,6 @@
 {
   "name": "react-geetest-v4",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "React library for GeeTest captcha v4 integration",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

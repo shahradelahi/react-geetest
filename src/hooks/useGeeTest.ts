@@ -2,7 +2,7 @@ import React from 'react';
 import { GeeTest, GeeTestOverrideParams, GeeTestState, InitConfig } from '../interface';
 import { GT4_JS } from '../Constants';
 
-type UseGeeTestOptions = Omit<InitConfig, 'captchaId'>;
+export type UseGeeTestOptions = Omit<InitConfig, 'captchaId'>;
 
 type UseGeeTestReturns = {
   captcha?: GeeTest;
