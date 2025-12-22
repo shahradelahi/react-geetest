@@ -43,12 +43,11 @@
   },
   "prettier": "@shahrad/prettier-config",
   "dependencies": {
-    "crypto-js": "^4.2.0"
+    "@se-oss/sha256": "^1.1.1"
   },
   "devDependencies": {
     "@shahrad/eslint-config": "^1.0.1",
     "@shahrad/prettier-config": "^1.2.2",
-    "@types/crypto-js": "^4.2.2",
     "@types/react": "^19.2.2",
     "eslint": "^9.39.2",
     "globals": "^16.5.0",

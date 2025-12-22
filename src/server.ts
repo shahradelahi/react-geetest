@@ -1,7 +1,7 @@
-import crypto from 'crypto-js';
-import { GeeTestValidateResult } from 'src/typings';
+import { hmacSha256 } from '@se-oss/sha256';
 
 import { VALIDATE_URL } from './Constants';
+import type { GeeTestValidateResult } from './typings';
 
 export type GeeTestValidateParams = GeeTestValidateResult & {
   sign_token: string;
@@ -50,5 +50,11 @@ export async function validateCaptcha(
 }
 
 export function generateSignToken(lotNumber: string, captchaKey: string): string {
-  return crypto.HmacSHA256(lotNumber, captchaKey).toString();
+  return toHex(hmacSha256(captchaKey, lotNumber));
+}
+
+function toHex(data: Uint8Array): string {
+  return Array.from(data)
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
 }
