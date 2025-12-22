@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   GeeTestError,
   GeeTestEventCallbacks,
@@ -9,8 +10,8 @@ import {
   OnErrorFn,
   OnFailFn,
   OnSuccessFn,
-} from 'src/typings';
-import { useGeeTest } from 'src/useGeeTest';
+} from './typings';
+import { useGeeTest } from './useGeeTest';
 
 export type GeeTestProps = GeeTestProduct &
   Omit<InitConfig, 'product' | 'onError'> &
@@ -24,7 +25,7 @@ export type GeeTestProps = GeeTestProduct &
     rootClassName?: string;
   };
 
-const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (props, ref): JSX.Element {
+const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (props, ref): React.ReactNode {
   const uniqueId = React.useId();
   const { container, containerId, rootClassName, product, ...rest } = props;
   const { onError, onReady, onNextReady, onSuccess, onClose, onFail, ...config } = rest;
