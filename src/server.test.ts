@@ -1,8 +1,9 @@
-import { describe, expect, it } from '@jest/globals';
-import { generateSignToken, validateCaptcha } from 'react-geetest-v4';
+import { describe, expect, it } from 'vitest';
+
+import { generateSignToken, validateCaptcha } from './server';
 
 describe('server validate captcha', () => {
-  it('should throw error for invalid captcha_id', async function () {
+  it('should throw error for invalid captcha_id', async () => {
     const result = await validateCaptcha({
       captcha_id: '',
       lot_number: '',
@@ -20,7 +21,8 @@ describe('server validate captcha', () => {
       expect(result.msg).toBe('not captcha_id');
     }
   });
-  it('should fail for invalid sign_token', async function () {
+
+  it('should fail for invalid sign_token', async () => {
     const result = await validateCaptcha({
       captcha_id: '647f5ed2ed8acb4be36784e01556bb71',
       lot_number: 'c4c69a52999045aea1d34b57f1ef29f2',
@@ -38,7 +40,8 @@ describe('server validate captcha', () => {
       expect(result.reason).toBe('sign_token error');
     }
   });
-  it('should fail for invalid pass_token', async function () {
+
+  it('should fail for invalid pass_token', async () => {
     const result = await validateCaptcha({
       captcha_id: '647f5ed2ed8acb4be36784e01556bb71',
       lot_number: 'c4c69a52999045aea1d34b57f1ef29f2',
