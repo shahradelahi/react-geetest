@@ -1,6 +1,7 @@
 import React from 'react';
-import { GT4_JS } from 'src/Constants';
-import { GeeTest, GeeTestOverrideParams, GeeTestState, InitConfig } from 'src/typings';
+
+import { GT4_JS } from './Constants';
+import type { GeeTest, GeeTestOverrideParams, GeeTestState, InitConfig } from './typings';
 
 export type UseGeeTestOptions = Omit<InitConfig, 'captchaId'>;
 
@@ -54,9 +55,12 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
         protocol: 'https://',
       };
 
-      window.initGeetest4({ captchaId: captchaId, ...defaultOptions, ...opts }, (captchaObj) => {
-        setCaptchaObj(captchaObj);
-      });
+      window.initGeetest4(
+        { captchaId: captchaId, ...defaultOptions, ...opts },
+        (captchaObj: GeeTest) => {
+          setCaptchaObj(captchaObj);
+        }
+      );
     }
 
     return () => {
@@ -103,8 +107,8 @@ function forceChange(config: ForceChangeConfig, scriptTxt: string): string {
 
   if (config.overrideWithForce) {
     Object.keys(config.overrideWithForce).forEach((key: any) => {
-      const rowData: string | number | boolean = config.overrideWithForce[key];
-      const data = typeof rowData === 'string' ? `'${rowData}'` : rowData;
+      const val = config.overrideWithForce[key];
+      const data = typeof val === 'string' ? `'${val}'` : `${val}`;
       modifiedScript = modifiedScript.replaceAll(
         newConfigStr,
         newConfigStr + `newConfig.${key} = ${data};`

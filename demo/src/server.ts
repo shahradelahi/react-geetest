@@ -10,7 +10,6 @@ app.post('/api/validate', async (c) => {
   if (!captcha_output || !gen_time || !lot_number || !pass_token) {
     return c.json({ error: 'Missing required parameters' }, 400);
   }
-  console.log(import.meta.env.VITE_GEETEST_CAPTCHA_ID, import.meta.env.VITE_GEETEST_CAPTCHA_KEY);
 
   try {
     const result = await validateCaptcha({
@@ -19,7 +18,7 @@ app.post('/api/validate', async (c) => {
       captcha_output,
       pass_token,
       gen_time,
-      sign_token: generateSignToken(lot_number, import.meta.env.VITE_GEETEST_CAPTCHA_KEY),
+      sign_token: generateSignToken(lot_number, import.meta.env['VITE_GEETEST_CAPTCHA_KEY']),
     });
 
     return c.json(result);

@@ -1,4 +1,4 @@
-import { initGeetest4 } from 'src/typings';
+import { initGeetest4 } from './typings';
 
 declare global {
   interface Window {

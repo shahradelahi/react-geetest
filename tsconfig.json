@@ -1,32 +1,6 @@
 {
-  "compilerOptions": {
-    "composite": false,
-    "declaration": true,
-    "declarationMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
-    "isolatedModules": true,
-    "moduleResolution": "node",
-    "module": "ESNext",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "preserveWatchOutput": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "downlevelIteration": true,
-    "jsx": "react",
-    "target": "es2022",
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "rootDir": "./src",
-    "outDir": "build",
-    "baseUrl": ".",
-    "paths": {
-      "react-geetest-v4": ["src/index.tsx"]
-    }
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "examples"]
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@shahrad/tsconfig",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist", "demo"]
 }
