@@ -1,6 +1,6 @@
 import { hmacSha256 } from '@se-oss/sha256';
 
-import { VALIDATE_URL } from './Constants';
+import { VALIDATE_URL } from './constants';
 import type { GeeTestValidateResult } from './typings';
 
 export type GeeTestValidateParams = GeeTestValidateResult & {
@@ -8,22 +8,24 @@ export type GeeTestValidateParams = GeeTestValidateResult & {
   validator_endpoint_url?: string;
 };
 
-export type GeeTestValidateResponse = { status: 'success' | 'error' } & {
-  result: 'success' | 'fail';
-  reason: string;
-  captcha_args: {
-    [key: string]: string;
-    used_type: string;
-    user_ip: string;
-    lot_number: string;
-    scene: string;
-    referer: string;
-  };
-} & {
-  code: string;
-  msg: string;
-  desc: object;
-};
+export type GeeTestValidateResponse =
+  | ({ status: 'success' } & {
+      result: 'success' | 'fail';
+      reason: string;
+      captcha_args: {
+        [key: string]: string;
+        used_type: string;
+        user_ip: string;
+        lot_number: string;
+        scene: string;
+        referer: string;
+      };
+    })
+  | ({ status: 'error' } & {
+      code: string;
+      msg: string;
+      desc: object;
+    });
 
 export async function validateCaptcha(
   params: GeeTestValidateParams
@@ -38,12 +40,12 @@ export async function validateCaptcha(
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: new URLSearchParams(postPrams).toString(),
+    body: new URLSearchParams(postPrams as any).toString(),
   });
 
   // When the request geetest service interface is abnormal, it shall be released to avoid blocking normal business.
-  if (!res.status.toString().startsWith('2')) {
-    throw new Error('server reposed with an error status code');
+  if (!res.ok) {
+    throw new Error(`GeeTest validation server responded with status ${res.status}`);
   }
 
   return await res.json();
@@ -54,7 +56,5 @@ export function generateSignToken(lotNumber: string, captchaKey: string): string
 }
 
 function toHex(data: Uint8Array): string {
-  return Array.from(data)
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
+  return Array.from(data, (b) => b.toString(16).padStart(2, '0')).join('');
 }

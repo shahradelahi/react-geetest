@@ -22,12 +22,12 @@ export type GeeTestProps = GeeTestProduct &
       width?: string;
       height?: string;
     };
-    rootClassName?: string;
+    className?: string;
   };
 
 const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (props, ref): React.ReactNode {
   const uniqueId = React.useId();
-  const { container, containerId, rootClassName, product, ...rest } = props;
+  const { container, containerId, className, product, ...rest } = props;
   const { onError, onReady, onNextReady, onSuccess, onClose, onFail, ...config } = rest;
 
   const { captcha, state } = useGeeTest(props.captchaId, {
@@ -83,7 +83,7 @@ const GeeTest = React.forwardRef<GeeTestRef, GeeTestProps>(function (props, ref)
         width: container?.width || '100%',
         height: container?.height || 'auto',
       }}
-      {...(rootClassName && { rootClassName })}
+      className={className}
       {...(product === 'bind' && {
         onClick: () => captcha?.showCaptcha(),
         children: props.children,

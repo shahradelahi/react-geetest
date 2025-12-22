@@ -11,11 +11,11 @@ export type GeeTestPopup = {
   product: 'popup';
 };
 
-export type GeeTestFlat = {
-  product: 'flat';
+export type GeeTestFloat = {
+  product: 'float';
 };
 
-export type GeeTestProduct = GeeTestBind | GeeTestPopup | GeeTestFlat;
+export type GeeTestProduct = GeeTestBind | GeeTestPopup | GeeTestFloat;
 
 export type GeeTestRef = {
   reset: () => void;
@@ -70,6 +70,9 @@ export type InitConfig = {
 export function initGeetest4(config: InitConfig, callback: (captchaObj: GeeTest) => void): void {
   if (typeof window === 'undefined') {
     throw new Error('initGeetest4 can only be called in browser');
+  }
+  if (!window.initGeetest4) {
+    throw new Error('GeeTest SDK not loaded');
   }
   return window.initGeetest4(config, callback);
 }

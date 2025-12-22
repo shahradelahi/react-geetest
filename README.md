@@ -6,7 +6,7 @@
 ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-geetest-v4)
 [![Install Size](https://packagephobia.com/badge?p=react-geetest-v4)](https://packagephobia.com/result?p=react-geetest-v4)
 
-_react-geetest-v4_ is a React integration for [GeeTest Captcha v4](https://docs.geetest.com/BehaviorVerification/overview/start/).
+_react-geetest-v4_ is a library for React integration for [GeeTest Captcha v4](https://docs.geetest.com/BehaviorVerification/overview/start/).
 
 ---
 

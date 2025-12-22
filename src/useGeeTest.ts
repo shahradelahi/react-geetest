@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GT4_JS } from './Constants';
+import { GT4_JS } from './constants';
 import type { GeeTest, GeeTestOverrideParams, GeeTestState, InitConfig } from './typings';
 
 export type UseGeeTestOptions = Omit<InitConfig, 'captchaId'>;
@@ -12,12 +12,24 @@ type UseGeeTestReturns = {
 
 export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGeeTestReturns {
   const [captchaObj, setCaptchaObj] = React.useState<GeeTest>();
-  const [currentState, setCurrentSate] = React.useState<GeeTestState>('loading');
+  const [currentState, setCurrentState] = React.useState<GeeTestState>('loading');
   const [scriptLoaded, setScriptLoaded] = React.useState<boolean>(false);
   const { script: staticScript, overrideWithForce, ...opts } = options;
 
   React.useEffect(() => {
     if (typeof window === 'undefined' || scriptLoaded) {
+      return;
+    }
+
+    const scriptId = 'geetest-v4-script';
+    const existingScript = document.getElementById(scriptId);
+
+    if (existingScript) {
+      if (typeof window.initGeetest4 !== 'undefined') {
+        setScriptLoaded(true);
+      } else {
+        existingScript.addEventListener('load', () => setScriptLoaded(true));
+      }
       return;
     }
 
@@ -27,6 +39,7 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
         .then((res) => res.text())
         .then((text) => {
           const script = document.createElement('script');
+          script.id = scriptId;
           script.innerHTML = forceChange({ ...opts, overrideWithForce }, text);
           script.type = 'text/javascript';
           document.head.appendChild(script);
@@ -40,14 +53,20 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
     // if force is false, it will use the origin
     else {
       const script = document.createElement('script');
+      script.id = scriptId;
       script.src = staticScript || GT4_JS;
       script.crossOrigin = 'anonymous';
       script.onload = () => {
         setScriptLoaded(true);
       };
+      script.onerror = (err) => {
+        console.error('Error when loading gt4 script', err);
+      };
       document.head.appendChild(script);
     }
   }, []);
+
+  const optionsString = JSON.stringify(opts);
 
   React.useEffect(() => {
     if (typeof window !== 'undefined' && scriptLoaded) {
@@ -55,37 +74,39 @@ export function useGeeTest(captchaId: string, options: UseGeeTestOptions): UseGe
         protocol: 'https://',
       };
 
-      window.initGeetest4(
+      window.initGeetest4!(
         { captchaId: captchaId, ...defaultOptions, ...opts },
         (captchaObj: GeeTest) => {
           setCaptchaObj(captchaObj);
         }
       );
     }
+  }, [scriptLoaded, captchaId, optionsString]);
 
+  React.useEffect(() => {
     return () => {
       if (captchaObj) {
         captchaObj.destroy();
       }
     };
-  }, [scriptLoaded, captchaId]);
+  }, [captchaObj]);
 
   React.useEffect(() => {
     if (captchaObj) {
       captchaObj.onReady(() => {
-        setCurrentSate('ready');
+        setCurrentState('ready');
       });
 
       captchaObj.onSuccess(() => {
-        setCurrentSate('success');
+        setCurrentState('success');
       });
 
       captchaObj.onError(() => {
-        setCurrentSate('error');
+        setCurrentState('error');
       });
 
       captchaObj.onClose(() => {
-        setCurrentSate('closed');
+        setCurrentState('closed');
       });
     }
   }, [captchaObj]);
