@@ -1,8 +1,8 @@
 import type { GeeTestProps } from './GeeTest';
 import GeeTest from './GeeTest';
+import type { GeeTestEventCallbacks, GeeTestRef, GeeTestValidateResult } from './interface';
 import type { GeeTestValidateParams } from './Server';
 import { generateSignToken, validateCaptcha } from './Server';
-import type { GeeTestEventCallbacks, GeeTestRef, GeeTestValidateResult } from './interface';
 
 export { validateCaptcha, generateSignToken };
 export type {

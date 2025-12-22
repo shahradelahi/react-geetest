@@ -24,9 +24,9 @@
     "outDir": "build",
     "baseUrl": ".",
     "paths": {
-      "react-geetest-v4": [ "src/index.tsx" ],
+      "react-geetest-v4": ["src/index.tsx"]
     }
   },
-  "include": [ "src/**/*" ],
-  "exclude": [ "node_modules", "dist", "examples" ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "examples"]
 }

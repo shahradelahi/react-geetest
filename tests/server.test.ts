@@ -46,7 +46,7 @@ describe('server validate captcha', () => {
       pass_token: '4b774095664ce55ad3ffe5c73b26af02430119056ec18bd5f25f21301bb19608',
       sign_token: generateSignToken(
         'c4c69a52999045aea1d34b57f1ef29f2',
-        'b09a7aafbfd83f73b35a9b530d0337bf',
+        'b09a7aafbfd83f73b35a9b530d0337bf'
       ),
       captcha_output:
         'r-npFi9qNlfgy-zgvhB4k0519xpmbTQLGXBC19aY4E0ES20Xp1YUyWcx8mbeo0WHPYWCUNvyGcNcVQqInczQnHdbL1F472wKz3OVJKgwhUik2v2XSNdVZFdqGAnnHR7-zi_Wq5ozdMLv0J4vF9ruveeSSnRd0uYHSNw4EnySYKpmleNmlaAtivXRAIbAeUyCTXeTU60_lAKapXsobRaEgG3Qf39RlAdTbK9HD0ixB1w=',

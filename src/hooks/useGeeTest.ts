@@ -1,6 +1,7 @@
 import React from 'react';
-import { GeeTest, GeeTestOverrideParams, GeeTestState, InitConfig } from '../interface';
+
 import { GT4_JS } from '../Constants';
+import { GeeTest, GeeTestOverrideParams, GeeTestState, InitConfig } from '../interface';
 
 export type UseGeeTestOptions = Omit<InitConfig, 'captchaId'>;
 
@@ -107,7 +108,7 @@ function forceChange(config: ForceChangeConfig, scriptTxt: string): string {
       const data = typeof rowData === 'string' ? `'${rowData}'` : rowData;
       modifiedScript = modifiedScript.replaceAll(
         newConfigStr,
-        newConfigStr + `newConfig.${key} = ${data};`,
+        newConfigStr + `newConfig.${key} = ${data};`
       );
     });
   }
