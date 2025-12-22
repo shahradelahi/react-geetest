@@ -1,7 +1,6 @@
 import React from 'react';
-
-import { GT4_JS } from '../Constants';
-import { GeeTest, GeeTestOverrideParams, GeeTestState, InitConfig } from '../interface';
+import { GT4_JS } from 'src/Constants';
+import { GeeTest, GeeTestOverrideParams, GeeTestState, InitConfig } from 'src/typings';
 
 export type UseGeeTestOptions = Omit<InitConfig, 'captchaId'>;
 

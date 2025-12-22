@@ -133,9 +133,3 @@ export type GeeTestOverrideParams = Record<string, string | number | boolean> & 
   guard?: boolean;
   language?: string;
 };
-
-declare global {
-  interface Window {
-    initGeetest4: typeof initGeetest4;
-  }
-}

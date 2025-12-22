@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { useGeeTest } from './hooks/useGeeTest';
 import {
   GeeTestError,
   GeeTestEventCallbacks,
@@ -11,7 +9,8 @@ import {
   OnErrorFn,
   OnFailFn,
   OnSuccessFn,
-} from './interface';
+} from 'src/typings';
+import { useGeeTest } from 'src/useGeeTest';
 
 export type GeeTestProps = GeeTestProduct &
   Omit<InitConfig, 'product' | 'onError'> &

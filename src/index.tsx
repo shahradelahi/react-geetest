@@ -1,19 +1,8 @@
-import type { GeeTestProps } from './GeeTest';
 import GeeTest from './GeeTest';
-import type { GeeTestEventCallbacks, GeeTestRef, GeeTestValidateResult } from './interface';
-import type { GeeTestValidateParams } from './Server';
-import { generateSignToken, validateCaptcha } from './Server';
 
-export { validateCaptcha, generateSignToken };
-export type {
-  GeeTestProps,
-  GeeTestValidateParams,
-  GeeTestValidateResult,
-  GeeTestRef,
-  GeeTestEventCallbacks,
-};
-
-export { useGeeTest } from './hooks/useGeeTest';
-export type { UseGeeTestOptions } from './hooks/useGeeTest';
+export type { GeeTestEventCallbacks, GeeTestRef, GeeTestValidateResult } from './typings';
+export { generateSignToken, validateCaptcha, type GeeTestValidateParams } from './Server';
+export { default as GeeTest, type GeeTestProps } from './GeeTest';
+export { useGeeTest, type UseGeeTestOptions } from './useGeeTest';
 
 export default GeeTest;
