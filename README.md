@@ -1,10 +1,28 @@
-# GeeTest v4 for React
-
-[![CI](https://github.com/shahradelahi/react-geetest/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/shahradelahi/react-geetest/actions/workflows/ci.yml)
-[![NPM Version](https://img.shields.io/npm/v/react-geetest-v4.svg)](https://www.npmjs.com/package/react-geetest-v4)
-[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](/LICENSE)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-geetest-v4)
-[![Install Size](https://packagephobia.com/badge?p=react-geetest-v4)](https://packagephobia.com/result?p=react-geetest-v4)
+<p align="center">
+  <a href="https://www.geetest.com/en/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://www.geetest.com/wp-content/uploads/2025/08/%E5%8F%8D%E8%89%B2on-1.png" alt="GeeTest" width="300" height="auto">
+      <img src="https://www.geetest.com/wp-content/uploads/2025/02/%E8%8B%B1%E6%96%87%E5%9F%BA%E7%A1%80%E7%BB%84%E5%90%88.png" alt="GeeTest" width="300" height="auto">
+    </picture>
+  </a>
+</p>
+<h1 align="center">
+  <p>
+    <a href="https://github.com/shahradelahi/node-stockfish/actions/workflows/ci.yml">
+      <img src="https://github.com/shahradelahi/node-stockfish/actions/workflows/ci.yml/badge.svg?branch=main&event=push" alt="CI">
+    </a>
+    <a href="https://www.npmjs.com/package/react-geetest-v4">
+      <img src="https://img.shields.io/npm/v/react-geetest-v4.svg" alt="NPM Version">
+    </a>
+    <a href="/LICENSE">
+      <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat" alt="MIT License">
+    </a>
+    <img src="https://img.shields.io/bundlephobia/minzip/react-geetest-v4" alt="npm bundle size">
+    <a href="https://packagephobia.com/result?p=react-geetest-v4">
+      <img src="https://packagephobia.com/badge?p=react-geetest-v4" alt="Install Size">
+    </a>
+  </p>
+</h1>
 
 _react-geetest-v4_ is a library for React integration for [GeeTest Captcha v4](https://docs.geetest.com/BehaviorVerification/overview/start/).
 
